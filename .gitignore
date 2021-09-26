@@ -1,0 +1,8 @@
+# Airflow
+logs/
+
+# Vim
+*.swp
+
+# Mac
+.DS_Store
