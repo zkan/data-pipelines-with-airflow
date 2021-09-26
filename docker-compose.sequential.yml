@@ -29,7 +29,7 @@ services:
       POSTGRES_PASSWORD: airflow
       POSTGRES_DB: airflow
     volumes:
-      - airflow-metastore-db-volume:/var/lib/postgresql/data
+      - airflow-metastore-data-volume:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "airflow"]
       interval: 5s
@@ -139,7 +139,7 @@ services:
       _AIRFLOW_WWW_USER_PASSWORD: ${_AIRFLOW_WWW_USER_PASSWORD:-airflow}
     user: "0:${AIRFLOW_GID:-0}"
     volumes:
-      - .:/sources
+      - ./mnt:/sources
 
   airflow-cli:
     <<: *airflow-common
@@ -178,7 +178,7 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DB=postgres
     volumes:
-      - postgres-db-volume:/var/lib/postgresql/data
+      - postgres-data-volume:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD", "pg_isready", "-q", "-d", "postgres", "-U", "postgres"]
       timeout: 30s
@@ -193,6 +193,6 @@ services:
       - 8025:8025
 
 volumes:
-  airflow-metastore-db-volume:
+  airflow-metastore-data-volume:
   minio-data-volume:
   postgres-data-volume:
