@@ -221,6 +221,22 @@ services:
     restart: always
     command: server /data --console-address ":9001"
 
+  postgres:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=postgres
+    volumes:
+      - postgres-db-volume:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD", "pg_isready", "-q", "-d", "postgres", "-U", "postgres"]
+      timeout: 30s
+      interval: 5s
+      retries: 5
+    restart: always
+
 volumes:
   airflow-metastore-db-volume:
   minio-data-volume:
+  postgres-data-volume:
