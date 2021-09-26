@@ -1,5 +1,25 @@
 # Data Pipeline with Airflow
 
+## Starting Airflow
+
+With `SequentialExecutor`
+
+```sh
+docker-compose -f docker-compose.sequential.yml up -d
+```
+
+With `LocalExecutor`
+
+```sh
+docker-compose -f docker-compose.local.yml up -d
+```
+
+With `CeleryExecutor`
+
+```sh
+docker-compose -f docker-compose.celery.yml up -d
+```
+
 ## Airflow S3 Connection to MinIO
 
 * Connection Name: `local_minio` or any name you like
