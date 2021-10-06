@@ -1,5 +1,11 @@
 # Data Pipeline with Airflow
 
+Before we start, let's create these folders first:
+
+```sh
+mkdir -p mnt/dags mnt/logs mnt/plugins
+```
+
 ## Starting Airflow
 
 With `SequentialExecutor`
