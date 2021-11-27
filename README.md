@@ -1,4 +1,4 @@
-# Data Pipeline with Airflow
+# Data Pipelines with Airflow
 
 Before we start, let's create these folders first:
 
@@ -38,6 +38,11 @@ docker-compose -f docker-compose.celery.yml up -d
     "host": "http://minio:9000"
   }
   ```
+
+## Data Source
+
+* [CCXT - CryptoCurrency eXchange Trading Library](https://github.com/ccxt/ccxt)
+* [Hello, CCXT!](https://github.com/zkan/hello-ccxt)
 
 ## References
 
