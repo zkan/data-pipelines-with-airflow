@@ -39,6 +39,18 @@ docker-compose -f docker-compose.celery.yml up -d
   }
   ```
 
+## Running Tests
+
+First we need to install pytest:
+```sh
+pip install pytest
+```
+
+Run tests:
+```sh
+pytest
+```
+
 ## References
 
 * [Running Airflow in Docker](https://airflow.apache.org/docs/apache-airflow/stable/start/docker.html)
