@@ -11,19 +11,19 @@ mkdir -p mnt/dags mnt/tests mnt/logs mnt/plugins
 With `SequentialExecutor`
 
 ```sh
-docker-compose -f docker-compose.sequential.yml up -d
+docker-compose -f sequential.yml up -d
 ```
 
 With `LocalExecutor`
 
 ```sh
-docker-compose -f docker-compose.local.yml up -d
+docker-compose -f local.yml up -d
 ```
 
 With `CeleryExecutor`
 
 ```sh
-docker-compose -f docker-compose.celery.yml up -d
+docker-compose -f celery.yml up -d
 ```
 
 ## Airflow S3 Connection to MinIO
