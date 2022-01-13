@@ -4,6 +4,7 @@ Before we start, let's create these folders first:
 
 ```sh
 mkdir -p mnt/dags mnt/tests mnt/logs mnt/plugins
+echo -e "AIRFLOW_UID=$(id -u)" > .env
 ```
 
 ## Starting Airflow
