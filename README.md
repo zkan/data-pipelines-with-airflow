@@ -49,7 +49,7 @@ docker-compose -f celery.yml up -d
 * Extra: a JSON object with the following properties:
   ```json
   {
-    "aws_access_key_id":"your_minio_access_key",
+    "aws_access_key_id": "your_minio_access_key",
     "aws_secret_access_key": "your_minio_secret_key",
     "host": "http://minio:9000"
   }
