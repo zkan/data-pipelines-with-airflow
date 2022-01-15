@@ -10,7 +10,9 @@
 * [Running Tests](#running-tests)
 * [References](#references)
 
-Before we start, let's create these folders first:
+## Starting Airflow
+
+Before we run Airflow, let's create these folders first:
 
 ```sh
 mkdir -p mnt/dags mnt/tests mnt/logs mnt/plugins
@@ -21,8 +23,6 @@ Make sure to configure the Airflow user for the docker-compose:
 ```sh
 echo -e "AIRFLOW_UID=$(id -u)" > .env
 ```
-
-## Starting Airflow
 
 With `SequentialExecutor`
 
