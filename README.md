@@ -1,5 +1,15 @@
 # Data Pipeline with Airflow
 
+## Contents
+
+* Prerequisites
+  * [Installing Docker Desktop](./docs/installing-docker-desktop.md)
+  * [Installing Visual Studio Code](./docs/installing-vscode.md)
+* [Starting Airflow](#starting-airflow)
+* [Airflow S3 Connection to MinIO](#airflow-s3-connection-to-minio)
+* [Running Tests](#running-tests)
+* [References](#references)
+
 Before we start, let's create these folders first:
 
 ```sh
