@@ -19,3 +19,8 @@ $ docker
 ![Docker Command Outpue](./images/docker-command-output.png)
 
 ถ้าได้ตามนี้แล้วก็เป็นอันเสร็จสิ้นการติดตั้ง Docker Desktop
+
+## References
+
+* [Install Docker Desktop on Windows](https://docs.docker.com/desktop/windows/install/)
+* [Installation of Hyper-V on windows 10 home](https://docs.microsoft.com/en-us/answers/questions/29175/installation-of-hyper-v-on-windows-10-home.html)
