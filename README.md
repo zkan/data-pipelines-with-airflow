@@ -44,7 +44,7 @@ docker-compose -f celery.yml up -d
 
 ## Airflow S3 Connection to MinIO
 
-* Connection Name: `local_minio` or any name you like
+* Connection Name: `minio` or any name you like
 * Connection Type: S3
 * Extra: a JSON object with the following properties:
   ```json
