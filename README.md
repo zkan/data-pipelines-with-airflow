@@ -27,18 +27,21 @@ echo -e "AIRFLOW_UID=$(id -u)" > .env
 With `SequentialExecutor`
 
 ```sh
+docker-compose -f sequential.yml build
 docker-compose -f sequential.yml up -d
 ```
 
 With `LocalExecutor`
 
 ```sh
+docker-compose -f local.yml build
 docker-compose -f local.yml up -d
 ```
 
 With `CeleryExecutor`
 
 ```sh
+docker-compose -f celery.yml build
 docker-compose -f celery.yml up -d
 ```
 
