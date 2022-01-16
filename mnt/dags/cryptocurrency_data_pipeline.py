@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 
 from airflow import DAG
 from airflow.operators.dummy import DummyOperator
+from airflow.operators.email import EmailOperator
 from airflow.operators.python import PythonOperator
 from airflow.providers.amazon.aws.hooks.s3 import S3Hook
 from airflow.providers.postgres.hooks.postgres import PostgresHook
@@ -21,7 +22,6 @@ def _fetch_ohlcv(**context):
 
     dt_obj = datetime.strptime(ds, "%Y-%m-%d")
     millisec = int(dt_obj.timestamp() * 1000)
-
     ohlcv = exchange.fetch_ohlcv("SHIB/USDT", timeframe="1h", since=millisec, limit=30)
     logging.info(ohlcv)
 
@@ -49,25 +49,12 @@ def _download_file(**context):
     return file_name
 
 
-# def _transform(**context):
-#     file_name = context["ti"].xcom_pull(task_ids="download_file", key="return_value")
-#     df = pd.read_csv(file_name, header=None)
-
-#     with pd.option_context("display.precision", 10):
-#         logging.info(df.info())
-#         logging.info(df.head())
-
-
 def _load_data_into_database(**context):
     postgres_hook = PostgresHook(postgres_conn_id="postgres")
     conn = postgres_hook.get_conn()
     cursor = conn.cursor()
 
     file_name = context["ti"].xcom_pull(task_ids="download_file", key="return_value")
-    # with open(file_name, "r") as f:
-    #     cursor.copy_from(f, "cryptocurrency_import", sep=",")
-    #     conn.commit()
-
     postgres_hook.copy_expert(
         """
             COPY
@@ -80,6 +67,7 @@ def _load_data_into_database(**context):
 
 default_args = {
     "owner": "zkan",
+    "email": ["zkan@hey.com"],
     "start_date": timezone.datetime(2022, 1, 16),
     "retries": 3,
     "retry_delay": timedelta(minutes=3),
@@ -100,11 +88,6 @@ with DAG(
         task_id="download_file",
         python_callable=_download_file,
     )
-
-    # transform = PythonOperator(
-    #     task_id="transform",
-    #     python_callable=_transform,
-    # )
 
     create_import_table = PostgresOperator(
         task_id="create_import_table",
@@ -180,7 +163,13 @@ with DAG(
         """,
     )
 
+    notify = EmailOperator(
+        task_id="notify",
+        to=["zkan@hey.com"],
+        subject="Loaded data into database successfully on {{ ds }}",
+        html_content="Your pipeline has loaded data into database successfully",
+    )
+
     end = DummyOperator(task_id="end")
 
-    # start >> fetch_ohlcv >> download_file >> transform >> create_import_table >> load_data_into_database >> create_final_table >> merge_import_into_final_table >> clear_import_table >> end
-    start >> fetch_ohlcv >> download_file >> create_import_table >> load_data_into_database >> create_final_table >> merge_import_into_final_table >> clear_import_table >> end
+    start >> fetch_ohlcv >> download_file >> create_import_table >> load_data_into_database >> create_final_table >> merge_import_into_final_table >> clear_import_table >> notify >> end
