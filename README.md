@@ -24,18 +24,11 @@ Make sure to configure the Airflow user for the docker-compose:
 echo -e "AIRFLOW_UID=$(id -u)" > .env
 ```
 
-With `SequentialExecutor`
+With `LocalExecutor`
 
 ```sh
 docker-compose build
 docker-compose up
-```
-
-With `LocalExecutor`
-
-```sh
-docker-compose -f docker-compose-local.yml build
-docker-compose -f docker-compose-local.yml up
 ```
 
 With `CeleryExecutor`
@@ -43,6 +36,13 @@ With `CeleryExecutor`
 ```sh
 docker-compose -f docker-compose-celery.yml build
 docker-compose -f docker-compose-celery.yml up
+```
+
+With `SequentialExecutor` (NOT recommended for production use)
+
+```sh
+docker-compose -f docker-compose-sequential.yml build
+docker-compose -f docker-compose-sequential.yml up
 ```
 
 ## Airflow S3 Connection to MinIO
