@@ -27,22 +27,22 @@ echo -e "AIRFLOW_UID=$(id -u)" > .env
 With `SequentialExecutor`
 
 ```sh
-docker-compose -f sequential.yml build
-docker-compose -f sequential.yml up -d
+docker-compose build
+docker-compose up
 ```
 
 With `LocalExecutor`
 
 ```sh
-docker-compose -f local.yml build
-docker-compose -f local.yml up -d
+docker-compose -f docker-compose-local.yml build
+docker-compose -f docker-compose-local.yml up
 ```
 
 With `CeleryExecutor`
 
 ```sh
-docker-compose -f celery.yml build
-docker-compose -f celery.yml up -d
+docker-compose -f docker-compose-celery.yml build
+docker-compose -f docker-compose-celery.yml up
 ```
 
 ## Airflow S3 Connection to MinIO
