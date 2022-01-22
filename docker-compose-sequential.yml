@@ -1,18 +1,27 @@
-version: '3'
+version: '3.8'
+
 x-airflow-common:
   &airflow-common
-  image: ${AIRFLOW_IMAGE_NAME:-apache/airflow:2.1.4}
+  image: skooldio-airflow:latest
+  build:
+    context: .
+    dockerfile: Dockerfile
   environment:
     &airflow-common-env
     AIRFLOW__CORE__EXECUTOR: SequentialExecutor
     AIRFLOW__CORE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@airflow-metastore/airflow
     AIRFLOW__CORE__FERNET_KEY: ''
     AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
-    AIRFLOW__CORE__LOAD_EXAMPLES: 'true'
+    AIRFLOW__CORE__LOAD_EXAMPLES: 'false'
     AIRFLOW__API__AUTH_BACKEND: 'airflow.api.auth.backend.basic_auth'
+    AIRFLOW__SMTP__SMTP_HOST: mailhog
+    AIRFLOW__SMTP__SMTP_STARTTLS: 'false'
+    AIRFLOW__SMTP__SMTP_SSL: 'false'
+    AIRFLOW__SMTP__SMTP_PORT: 1025
     _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-}
   volumes:
     - ./mnt/dags:/opt/airflow/dags
+    - ./mnt/tests:/opt/airflow/tests
     - ./mnt/logs:/opt/airflow/logs
     - ./mnt/plugins:/opt/airflow/plugins
   user: "${AIRFLOW_UID:-50000}:${AIRFLOW_GID:-0}"
@@ -154,7 +163,7 @@ services:
       - airflow
 
   minio:
-    image: quay.io/minio/minio:RELEASE.2021-09-24T00-24-24Z
+    image: minio/minio:RELEASE.2022-01-08T03-11-54Z
     environment:
       MINIO_ROOT_USER: minio
       MINIO_ROOT_PASSWORD: minio123
