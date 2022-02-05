@@ -5,10 +5,16 @@
 * Prerequisites
   * [Installing Docker Desktop](./docs/installing-docker-desktop.md)
   * [Installing Visual Studio Code](./docs/installing-vscode.md)
+* [Data Source](#data-source)
 * [Starting Airflow](#starting-airflow)
 * [Airflow S3 Connection to MinIO](#airflow-s3-connection-to-minio)
 * [Running Tests](#running-tests)
 * [References](#references)
+
+## Data Source
+
+* [CCXT - CryptoCurrency eXchange Trading Library](https://github.com/ccxt/ccxt)
+* [Hello, CCXT!](https://github.com/zkan/hello-ccxt)
 
 ## Starting Airflow
 
