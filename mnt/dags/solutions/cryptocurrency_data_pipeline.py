@@ -68,7 +68,7 @@ def _load_data_into_database(**context):
 default_args = {
     "owner": "zkan",
     "email": ["zkan@hey.com"],
-    "start_date": timezone.datetime(2022, 1, 16),
+    "start_date": timezone.datetime(2022, 2, 1),
     "retries": 3,
     "retry_delay": timedelta(minutes=3),
 }
