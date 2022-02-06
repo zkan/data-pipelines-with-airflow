@@ -61,14 +61,16 @@ docker-compose down
 
 * Connection Name: `minio` or any name you like
 * Connection Type: S3
+* Login: `<replace_here_with_your_minio_access_key>`
+* Password: `<replace_here_with_your_minio_secret_key>`
 * Extra: a JSON object with the following properties:
   ```json
   {
-    "aws_access_key_id": "your_minio_access_key",
-    "aws_secret_access_key": "your_minio_secret_key",
     "host": "http://minio:9000"
   }
   ```
+
+**Note:** If we were using AWS S3, we don't need to specify the host in the extra.
 
 ## Running Tests
 
