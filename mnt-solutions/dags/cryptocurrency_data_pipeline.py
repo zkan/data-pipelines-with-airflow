@@ -22,16 +22,16 @@ def _fetch_ohlcv(**context):
 
     dt_obj = datetime.strptime(ds, "%Y-%m-%d")
     millisec = int(dt_obj.timestamp() * 1000)
-    ohlcv = exchange.fetch_ohlcv("SHIB/USDT", timeframe="1h", since=millisec, limit=30)
+    ohlcv = exchange.fetch_ohlcv("SHIB/USDT", timeframe="1h", since=millisec, limit=24)
     logging.info(ohlcv)
 
-    with open("shib.csv", "w") as f:
+    with open(f"shib-{ds}.csv", "w") as f:
         writer = csv.writer(f)
         writer.writerows(ohlcv)
 
     s3_hook = S3Hook(aws_conn_id="minio")
     s3_hook.load_file(
-        "shib.csv",
+        f"shib-{ds}.csv",
         key=f"cryptocurrency/{ds}/shib.csv",
         bucket_name="datalake",
         replace=True,
@@ -73,7 +73,7 @@ default_args = {
     "retry_delay": timedelta(minutes=3),
 }
 with DAG(
-    "solutions.cryptocurrency_data_pipeline",
+    "cryptocurrency_data_pipeline",
     default_args=default_args,
     schedule_interval="@daily",
 ) as dag:
