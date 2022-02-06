@@ -14,9 +14,9 @@ default_args = {
     "start_date": timezone.datetime(2022, 2, 1),
 }
 with DAG(
-    "demo1",
+    "demo.demo2",
     default_args=default_args,
-    schedule_interval=None,
+    schedule_interval="@daily",
 ) as dag:
 
     hello = PythonOperator(

@@ -73,7 +73,7 @@ default_args = {
     "retry_delay": timedelta(minutes=3),
 }
 with DAG(
-    "cryptocurrency_data_pipeline",
+    "solutions.cryptocurrency_data_pipeline",
     default_args=default_args,
     schedule_interval="@daily",
 ) as dag:

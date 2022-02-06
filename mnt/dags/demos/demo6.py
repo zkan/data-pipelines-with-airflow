@@ -1,12 +1,6 @@
-import logging
-
 from airflow import DAG
-from airflow.operators.python import PythonOperator
+from airflow.operators.bash import BashOperator
 from airflow.utils import timezone
-
-
-def _hello():
-    logging.info("Hello")
 
 
 default_args = {
@@ -14,12 +8,12 @@ default_args = {
     "start_date": timezone.datetime(2022, 2, 1),
 }
 with DAG(
-    "demo2",
+    "demo.demo6",
     default_args=default_args,
     schedule_interval="@daily",
 ) as dag:
 
-    hello = PythonOperator(
-        task_id="hello",
-        python_callable=_hello,
+    t1 = BashOperator(
+        task_id="t1",
+        bash_command="echo {{ ds }}",
     )
