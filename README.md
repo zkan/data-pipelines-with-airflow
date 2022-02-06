@@ -51,6 +51,12 @@ docker-compose -f docker-compose-sequential.yml build
 docker-compose -f docker-compose-sequential.yml up
 ```
 
+To clean up the project, press Ctrl+C then run:
+
+```sh
+docker-compose down
+```
+
 ## Airflow S3 Connection to MinIO
 
 * Connection Name: `minio` or any name you like
