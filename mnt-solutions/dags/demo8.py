@@ -19,7 +19,7 @@ default_args = {
     "start_date": timezone.datetime(2022, 2, 1),
 }
 with DAG(
-    "demo.demo8",
+    "demo8",
     default_args=default_args,
     schedule_interval="@daily",
 ) as dag:
