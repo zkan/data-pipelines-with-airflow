@@ -22,3 +22,23 @@ with DAG(
         task_id="t2",
         bash_command="echo {{ 1 + 1 }}",
     )
+
+    t3 = BashOperator(
+        task_id="t3",
+        bash_command="echo {{ data_interval_start }}",
+    )
+
+    t4 = BashOperator(
+        task_id="t4",
+        bash_command="echo {{ data_interval_start | ds }}",
+    )
+
+    t5 = BashOperator(
+        task_id="t5",
+        bash_command="echo {{ macros.ds_add('2022-02-01', 10) }}",
+    )
+
+    t6 = BashOperator(
+        task_id="t6",
+        bash_command="echo {{ macros.ds_format('2022-02-01', '%Y-%m-%d', '%b %d, %Y') }}",
+    )
