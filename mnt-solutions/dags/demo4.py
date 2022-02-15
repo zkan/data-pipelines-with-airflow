@@ -1,36 +1,39 @@
-import time
-from datetime import timedelta
+import logging
 
 from airflow import DAG
-from airflow.operators.python_operator import PythonOperator
+from airflow.operators.python import PythonOperator
 from airflow.utils import timezone
 
 
-def _sleep():
-    time.sleep(3)
+def _hello():
+    logging.info("Hello")
+
+
+def _world(**context):
+    logging.info(f"{context}")
+
+    ds = context["ds"]
+    logging.info(f"World on {ds}")
 
 
 default_args = {
     "owner": "zkan",
     "start_date": timezone.datetime(2022, 2, 1),
-    "sla": timedelta(seconds=10),
 }
 with DAG(
     "demo4",
     default_args=default_args,
-    schedule_interval="*/5 * * * *",
-    catchup=False,
+    schedule_interval="@daily",
 ) as dag:
 
-    t1 = PythonOperator(
-        task_id="t1",
-        python_callable=_sleep,
+    hello = PythonOperator(
+        task_id="hello",
+        python_callable=_hello,
     )
 
-    t2 = PythonOperator(
-        task_id="t2",
-        python_callable=_sleep,
-        sla=timedelta(seconds=2),
+    world = PythonOperator(
+        task_id="world",
+        python_callable=_world,
     )
 
-    t1 >> t2
+    hello >> world
