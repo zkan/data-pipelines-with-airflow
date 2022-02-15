@@ -17,3 +17,8 @@ with DAG(
         task_id="t1",
         bash_command="echo {{ ds }}",
     )
+
+    t2 = BashOperator(
+        task_id="t2",
+        bash_command="echo {{ 1 + 1 }}",
+    )
