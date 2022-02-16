@@ -1,6 +1,22 @@
+import logging
+
 from airflow import DAG
-from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
 from airflow.utils import timezone
+
+
+def _push_values_to_xcom(**context):
+    context["ti"].xcom_push(key="course", value="Airflow (from XCom push)")
+
+    return "Airflow (from return)"
+
+
+def _pull_values_from_xcom(**context):
+    value1 = context["ti"].xcom_pull(task_ids="push_values_to_xcom", key="course")
+    value2 = context["ti"].xcom_pull(task_ids="push_values_to_xcom", key="return_value")
+
+    logging.info(f"value1: {value1}")
+    logging.info(f"value2: {value2}")
 
 
 default_args = {
@@ -13,32 +29,14 @@ with DAG(
     schedule_interval="@daily",
 ) as dag:
 
-    t1 = BashOperator(
-        task_id="t1",
-        bash_command="echo {{ ds }}",
+    push_values_to_xcom = PythonOperator(
+        task_id="push_values_to_xcom",
+        python_callable=_push_values_to_xcom,
     )
 
-    t2 = BashOperator(
-        task_id="t2",
-        bash_command="echo {{ 1 + 1 }}",
+    pull_values_from_xcom = PythonOperator(
+        task_id="pull_values_from_xcom",
+        python_callable=_pull_values_from_xcom,
     )
 
-    t3 = BashOperator(
-        task_id="t3",
-        bash_command="echo {{ data_interval_start }}",
-    )
-
-    t4 = BashOperator(
-        task_id="t4",
-        bash_command="echo {{ data_interval_start | ds }}",
-    )
-
-    t5 = BashOperator(
-        task_id="t5",
-        bash_command="echo {{ macros.ds_add('2022-02-01', 10) }}",
-    )
-
-    t6 = BashOperator(
-        task_id="t6",
-        bash_command="echo {{ macros.ds_format('2022-02-01', '%Y-%m-%d', '%b %d, %Y') }}",
-    )
+    push_values_to_xcom >> pull_values_from_xcom

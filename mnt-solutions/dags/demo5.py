@@ -1,16 +1,6 @@
-import logging
-
 from airflow import DAG
-from airflow.operators.python import PythonOperator
+from airflow.operators.bash import BashOperator
 from airflow.utils import timezone
-
-
-def _get_context(**context):
-    ds = context["ds"]
-    prev_ds = context["prev_ds"]
-
-    logging.info(f"ds: {ds}")
-    logging.info(f"prev_ds: {prev_ds}")
 
 
 default_args = {
@@ -23,7 +13,32 @@ with DAG(
     schedule_interval="@daily",
 ) as dag:
 
-    t1 = PythonOperator(
+    t1 = BashOperator(
         task_id="t1",
-        python_callable=_get_context,
+        bash_command="echo {{ ds }}",
+    )
+
+    t2 = BashOperator(
+        task_id="t2",
+        bash_command="echo {{ 1 + 1 }}",
+    )
+
+    t3 = BashOperator(
+        task_id="t3",
+        bash_command="echo {{ data_interval_start }}",
+    )
+
+    t4 = BashOperator(
+        task_id="t4",
+        bash_command="echo {{ data_interval_start | ds }}",
+    )
+
+    t5 = BashOperator(
+        task_id="t5",
+        bash_command="echo {{ macros.ds_add('2022-02-01', 10) }}",
+    )
+
+    t6 = BashOperator(
+        task_id="t6",
+        bash_command="echo {{ macros.ds_format('2022-02-01', '%Y-%m-%d', '%b %d, %Y') }}",
     )

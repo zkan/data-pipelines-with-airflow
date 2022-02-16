@@ -5,15 +5,14 @@ from airflow.operators.python import PythonOperator
 from airflow.utils import timezone
 
 
-def _hello():
-    logging.info("Hello")
-
-
-def _world(**context):
+def _get_context(**context):
     logging.info(f"{context}")
 
     ds = context["ds"]
-    logging.info(f"World on {ds}")
+    data_interval_start = context["data_interval_start"]
+
+    logging.info(f"ds: {ds}")
+    logging.info(f"data_interval_start: {data_interval_start}")
 
 
 default_args = {
@@ -26,14 +25,7 @@ with DAG(
     schedule_interval="@daily",
 ) as dag:
 
-    hello = PythonOperator(
-        task_id="hello",
-        python_callable=_hello,
+    get_context = PythonOperator(
+        task_id="get_context",
+        python_callable=_get_context,
     )
-
-    world = PythonOperator(
-        task_id="world",
-        python_callable=_world,
-    )
-
-    hello >> world

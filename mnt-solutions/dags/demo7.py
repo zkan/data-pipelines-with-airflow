@@ -1,22 +1,17 @@
 import logging
 
 from airflow import DAG
+from airflow.models import Variable
 from airflow.operators.python import PythonOperator
 from airflow.utils import timezone
 
 
-def _push_values_to_xcom(**context):
-    context["ti"].xcom_push(key="course", value="Airflow (from XCom push)")
+def _get_var():
+    foo = Variable.get("foo", default_var=None)
+    logging.info(foo)
 
-    return "Airflow (from return)"
-
-
-def _pull_values_from_xcom(**context):
-    value1 = context["ti"].xcom_pull(task_ids="t1", key="course")
-    value2 = context["ti"].xcom_pull(task_ids="t1", key="return_value")
-
-    logging.info(f"value1: {value1}")
-    logging.info(f"value2: {value2}")
+    bar = Variable.get("bar", deserialize_json=True, default_var=None)
+    logging.info(bar)
 
 
 default_args = {
@@ -29,14 +24,7 @@ with DAG(
     schedule_interval="@daily",
 ) as dag:
 
-    t1 = PythonOperator(
-        task_id="t1",
-        python_callable=_push_values_to_xcom,
+    get_var = PythonOperator(
+        task_id="get_var",
+        python_callable=_get_var,
     )
-
-    t2 = PythonOperator(
-        task_id="t2",
-        python_callable=_pull_values_from_xcom,
-    )
-
-    t1 >> t2
