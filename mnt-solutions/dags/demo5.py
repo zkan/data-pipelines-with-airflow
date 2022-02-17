@@ -1,6 +1,13 @@
+import logging
+
 from airflow import DAG
 from airflow.operators.bash import BashOperator
+from airflow.operators.python import PythonOperator
 from airflow.utils import timezone
+
+
+def _t6(my_date):
+    logging.info(my_date)
 
 
 default_args = {
@@ -38,7 +45,10 @@ with DAG(
         bash_command="echo {{ macros.ds_add('2022-02-01', 10) }}",
     )
 
-    t6 = BashOperator(
+    t6 = PythonOperator(
         task_id="t6",
-        bash_command="echo {{ macros.ds_format('2022-02-01', '%Y-%m-%d', '%b %d, %Y') }}",
+        python_callable=_t6,
+        op_kwargs={
+            "my_date": "{{ macros.ds_format('2022-02-01', '%Y-%m-%d', '%b %d, %Y') }}"
+        }
     )
