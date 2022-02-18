@@ -24,7 +24,7 @@ default_args = {
     "start_date": timezone.datetime(2022, 2, 1),
 }
 with DAG(
-    "demo6",
+    "demo_xcoms",
     default_args=default_args,
     schedule_interval="@daily",
 ) as dag:

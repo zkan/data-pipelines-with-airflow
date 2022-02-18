@@ -16,7 +16,7 @@ default_args = {
     "sla": timedelta(seconds=10),
 }
 with DAG(
-    "demo4",
+    "demo_sla",
     default_args=default_args,
     schedule_interval="*/5 * * * *",
     catchup=False,

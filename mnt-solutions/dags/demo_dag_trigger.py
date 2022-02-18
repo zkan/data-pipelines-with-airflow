@@ -8,13 +8,13 @@ default_args = {
     "start_date": timezone.datetime(2022, 2, 1),
 }
 with DAG(
-    "demo10_trigger",
+    "demo_dag_trigger",
     default_args=default_args,
     schedule_interval="@daily",
 ) as dag:
 
     trigger = TriggerDagRunOperator(
         task_id="trigger",
-        trigger_dag_id="demo10_target",
+        trigger_dag_id="demo_dag_target",
         conf={"message": "Hello World"},
     )
