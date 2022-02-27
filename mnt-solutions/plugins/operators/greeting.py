@@ -12,4 +12,8 @@ class GreetingOperator(BaseOperator):
 
     def execute(self, context):
         self.log.info(f"{context}")
-        self.log.info(f"{self.greeting}, {self.name}")
+
+        greeting_message = f"{self.greeting}, {self.name}"
+        self.log.info(greeting_message)
+
+        return greeting_message
