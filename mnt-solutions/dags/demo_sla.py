@@ -12,8 +12,9 @@ def _sleep():
 
 default_args = {
     "owner": "zkan",
+    "email": ["kan@dataengineercafe.io"],
     "start_date": timezone.datetime(2022, 2, 1),
-    "sla": timedelta(seconds=10),
+    "sla": timedelta(seconds=5),
 }
 with DAG(
     "demo_sla",
@@ -30,7 +31,7 @@ with DAG(
     t2 = PythonOperator(
         task_id="t2",
         python_callable=_sleep,
-        sla=timedelta(seconds=2),
+        # sla=timedelta(seconds=30),
     )
 
     t1 >> t2
