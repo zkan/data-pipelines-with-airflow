@@ -23,6 +23,7 @@ default_args = {
 with DAG(
     "demo_testing_dag",
     default_args=default_args,
+    schedule_interval=None,
     catchup=False,
 ) as dag:
 
