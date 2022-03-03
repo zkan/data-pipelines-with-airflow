@@ -26,7 +26,7 @@ default_args = {
 with DAG(
     "demo_xcoms",
     default_args=default_args,
-    schedule_interval="@daily",
+    schedule_interval=None,
 ) as dag:
 
     push_values_to_xcom = PythonOperator(

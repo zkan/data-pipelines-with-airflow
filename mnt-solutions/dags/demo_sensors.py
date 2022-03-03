@@ -10,7 +10,7 @@ default_args = {
 with DAG(
     "demo_sensors",
     default_args=default_args,
-    schedule_interval="@daily",
+    schedule_interval=None,
 ) as dag:
 
     is_file_available = FileSensor(

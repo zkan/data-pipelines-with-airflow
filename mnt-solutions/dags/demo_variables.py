@@ -21,7 +21,7 @@ default_args = {
 with DAG(
     "demo7",
     default_args=default_args,
-    schedule_interval="@daily",
+    schedule_interval=None,
 ) as dag:
 
     get_var = PythonOperator(

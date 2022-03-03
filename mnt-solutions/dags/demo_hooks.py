@@ -30,7 +30,7 @@ default_args = {
 with DAG(
     "demo_hooks",
     default_args=default_args,
-    schedule_interval="@daily",
+    schedule_interval=None,
 ) as dag:
 
     query_data = PythonOperator(

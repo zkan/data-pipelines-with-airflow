@@ -17,7 +17,7 @@ default_args = {
 with DAG(
     "demo_templating",
     default_args=default_args,
-    schedule_interval="@daily",
+    schedule_interval=None,
 ) as dag:
 
     t1 = BashOperator(

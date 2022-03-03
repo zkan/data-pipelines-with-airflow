@@ -10,7 +10,7 @@ default_args = {
 with DAG(
     "demo_dag_trigger",
     default_args=default_args,
-    schedule_interval="@daily",
+    schedule_interval=None,
 ) as dag:
 
     trigger = TriggerDagRunOperator(
