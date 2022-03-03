@@ -6,7 +6,7 @@ from airflow.utils import timezone
 default_args = {
     "owner": "zkan",
     "start_date": timezone.datetime(2022, 2, 1),
-    "depends_on_past": True,
+    # "depends_on_past": True,
 }
 with DAG(
     "demo_backfilling",
