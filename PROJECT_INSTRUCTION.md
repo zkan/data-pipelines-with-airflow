@@ -32,12 +32,12 @@
         postgres_conn_id="postgres",
         sql="""
             CREATE TABLE IF NOT EXISTS cryptocurrency_import (
-              timestamp BIGINT,
-              open FLOAT,
-              highest FLOAT,
-              lowest FLOAT,
-              closing FLOAT,
-              volume FLOAT
+                timestamp BIGINT,
+                open FLOAT,
+                highest FLOAT,
+                lowest FLOAT,
+                closing FLOAT,
+                volume FLOAT
             )
         """,
     )
@@ -62,12 +62,12 @@
         postgres_conn_id="postgres",
         sql="""
             CREATE TABLE IF NOT EXISTS cryptocurrency (
-              timestamp BIGINT PRIMARY KEY,
-              open FLOAT,
-              highest FLOAT,
-              lowest FLOAT,
-              closing FLOAT,
-              volume FLOAT
+                timestamp BIGINT PRIMARY KEY,
+                open FLOAT,
+                highest FLOAT,
+                lowest FLOAT,
+                closing FLOAT,
+                volume FLOAT
             )
         """,
     )
@@ -81,29 +81,29 @@
         postgres_conn_id="postgres",
         sql="""
             INSERT INTO cryptocurrency (
-              timestamp,
-              open,
-              highest,
-              lowest,
-              closing,
-              volume
+                timestamp,
+                open,
+                highest,
+                lowest,
+                closing,
+                volume
             )
             SELECT
-              timestamp,
-              open,
-              highest,
-              lowest,
-              closing,
-              volume
+                timestamp,
+                open,
+                highest,
+                lowest,
+                closing,
+                volume
             FROM
-              cryptocurrency_import
+                cryptocurrency_import
             ON CONFLICT (timestamp)
             DO UPDATE SET
-              open = EXCLUDED.open,
-              highest = EXCLUDED.highest,
-              lowest = EXCLUDED.lowest,
-              closing = EXCLUDED.closing,
-              volume = EXCLUDED.volume
+                open = EXCLUDED.open,
+                highest = EXCLUDED.highest,
+                lowest = EXCLUDED.lowest,
+                closing = EXCLUDED.closing,
+                volume = EXCLUDED.volume
         """,
     )
     ```
