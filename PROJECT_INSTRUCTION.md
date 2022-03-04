@@ -125,7 +125,7 @@
    ```py
    notify = EmailOperator(
        task_id="notify",
-       to=["zkan@hey.com"],
+       to=["kan@dataengineercafe.io"],
        subject="Loaded data into database successfully on {{ ds }}",
        html_content="Your pipeline has loaded data into database successfully",
    )
