@@ -11,7 +11,7 @@ def _hello():
 
 default_args = {
     "owner": "zkan",
-    "start_date": timezone.datetime(2022, 2, 1),
+    "start_date": timezone.datetime(2022, 3, 1),
 }
 with DAG(
     "demo_scheduling",
