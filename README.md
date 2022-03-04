@@ -7,6 +7,7 @@
   - [Installing Visual Studio Code](./docs/installing-vscode.md)
 - [Data Source](#data-source)
 - [Starting Airflow](#starting-airflow)
+- [Project Instruction](./docs/project-instruction.md)
 - [Airflow S3 Connection to MinIO](#airflow-s3-connection-to-minio)
 - [Running Tests](#running-tests)
 - [References](#references)
