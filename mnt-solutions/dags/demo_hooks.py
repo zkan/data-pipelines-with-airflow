@@ -20,7 +20,7 @@ def _query_data():
     cursor.execute(sql)
     rows = cursor.fetchall()
     for each in rows:
-        print(each)
+        logging.info(each)
 
 
 default_args = {
