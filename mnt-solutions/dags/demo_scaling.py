@@ -1,7 +1,7 @@
 import logging
 
 from airflow import DAG
-from airflow.operators.dummy import DummyOperator
+from airflow.operators.bash import BashOperator
 from airflow.utils import timezone
 
 
@@ -15,10 +15,25 @@ with DAG(
     schedule_interval=None,
 ) as dag:
 
-    t1 = DummyOperator(task_id="t1")
-    t2 = DummyOperator(task_id="t2")
-    t3 = DummyOperator(task_id="t3")
-    t4 = DummyOperator(task_id="t4")
-    t5 = DummyOperator(task_id="t5")
+    t1 = BashOperator(
+        task_id="t1",
+        bash_command="echo 't1'",
+    )
+    t2 = BashOperator(
+        task_id="t2",
+        bash_command="echo 't2'",
+    )
+    t3 = BashOperator(
+        task_id="t3",
+        bash_command="echo 't3'",
+    )
+    t4 = BashOperator(
+        task_id="t4",
+        bash_command="echo 't4'",
+    )
+    t5 = BashOperator(
+        task_id="t5",
+        bash_command="echo 't5'",
+    )
 
     t1 >> [t2, t3, t4] >> t5
