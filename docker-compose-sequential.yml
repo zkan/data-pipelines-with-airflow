@@ -18,6 +18,7 @@ x-airflow-common:
     AIRFLOW__SMTP__SMTP_STARTTLS: 'false'
     AIRFLOW__SMTP__SMTP_SSL: 'false'
     AIRFLOW__SMTP__SMTP_PORT: 1025
+    AIRFLOW__SCHEDULER__DAG_DIR_LIST_INTERVAL: 15
     _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-}
   volumes:
     - ./mnt/dags:/opt/airflow/dags
