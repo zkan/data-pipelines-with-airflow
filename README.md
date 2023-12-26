@@ -19,7 +19,7 @@
 
 ## Starting Airflow
 
-Before we run Airflow, let's create these folders first:
+Before we run Airflow, let's create these folders below first. Please note that if you're using Windows, you can skip this step.
 
 ```sh
 mkdir -p mnt/dags mnt/logs mnt/plugins mnt/tests
