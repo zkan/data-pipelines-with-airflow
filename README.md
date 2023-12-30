@@ -63,9 +63,9 @@ docker-compose down
 Since MinIO offers S3 compatible object storage, we can set the connection type to "Amazon Web Services". However, we'll need to set an extra option, so that Airflow connects to MinIO instead of S3.
 
 - Connection Name: `minio` or any name you like
-- Connection Type: S3
-- Login: `<replace_here_with_your_minio_access_key>`
-- Password: `<replace_here_with_your_minio_secret_key>`
+- Connection Type: Amazon Web Services
+- AWS Access Key ID: `<replace_here_with_your_minio_access_key>`
+- AWS Secret Access Key: `<replace_here_with_your_minio_secret_key>`
 - Extra: a JSON object with the following properties:
   ```json
   {
