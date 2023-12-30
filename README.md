@@ -58,9 +58,9 @@ To clean up the project, press Ctrl+C then run:
 docker-compose down
 ```
 
-## Airflow S3 Connection to MinIO
+## Airflow Connection to MinIO
 
-Since MinIO offers S3 compatible object storage, we can set the connection type to S3. However, we'll need to set an extra option, so that Airflow connects to MinIO instead of S3.
+Since MinIO offers S3 compatible object storage, we can set the connection type to "Amazon Web Services". However, we'll need to set an extra option, so that Airflow connects to MinIO instead of S3.
 
 - Connection Name: `minio` or any name you like
 - Connection Type: S3
@@ -73,7 +73,11 @@ Since MinIO offers S3 compatible object storage, we can set the connection type 
   }
   ```
 
-**Note:** If we were using AWS S3, we don't need to specify the host in the extra.
+See the example below:
+
+![Airflow Connection to MinIO](./docs/images/airflow-connection-to-minio.png)
+
+**Note:** If you were using AWS S3 already, you don't need to specify the host in the extra.
 
 ## Running Tests
 
