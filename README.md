@@ -25,7 +25,7 @@ Before we run Airflow, let's create these folders below first. Please note that 
 mkdir -p mnt/dags mnt/logs mnt/plugins mnt/tests
 ```
 
-On **Linux**, please make sure to configure the Airflow user for the docker-compose:
+On **Linux**, please make sure to configure the Airflow user for the Docker compose:
 
 ```sh
 echo -e "AIRFLOW_UID=$(id -u)" > .env
@@ -34,28 +34,28 @@ echo -e "AIRFLOW_UID=$(id -u)" > .env
 With `LocalExecutor`
 
 ```sh
-docker-compose build
-docker-compose up
+docker compose build
+docker compose up
 ```
 
 With `CeleryExecutor`
 
 ```sh
-docker-compose -f docker-compose-celery.yml build
-docker-compose -f docker-compose-celery.yml up
+docker compose -f docker-compose-celery.yml build
+docker compose -f docker-compose-celery.yml up
 ```
 
 With `SequentialExecutor` (NOT recommended for production use)
 
 ```sh
-docker-compose -f docker-compose-sequential.yml build
-docker-compose -f docker-compose-sequential.yml up
+docker compose -f docker-compose-sequential.yml build
+docker compose -f docker-compose-sequential.yml up
 ```
 
 To clean up the project, press Ctrl+C then run:
 
 ```sh
-docker-compose down
+docker compose down
 ```
 
 ## Airflow Connection to MinIO
