@@ -1,18 +1,12 @@
-VOLUME_NAME = $(shell docker volume ls | grep data-pipelines-with-airflow | awk '{print $$2}')
-
 up:
-	docker-compose up -d
+	docker compose up -d
 
 down:
-	docker-compose down
+	docker compose down
 
-remove_volume:
-	docker volume rm $(VOLUME_NAME)
-
-clean: down remove_volume
+clean:
+	docker compose down -v
 
 restart: down up
 
-reset: down remove_volume up
-
-restart: down up
+reset: down clean up
