@@ -22,7 +22,7 @@
 Before we run Airflow, let's create these folders below first. Please note that if you're using Windows, you can skip this step.
 
 ```sh
-mkdir -p mnt/dags mnt/logs mnt/plugins mnt/tests
+mkdir -p ./config ./dags ./logs ./plugins ./tests
 ```
 
 On **Linux**, please make sure to configure the Airflow user for the Docker compose:

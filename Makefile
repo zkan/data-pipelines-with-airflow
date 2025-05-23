@@ -1,3 +1,6 @@
+setup:
+	mkdir -p ./config ./dags ./logs ./plugins ./tests
+
 up:
 	docker compose up -d
 
