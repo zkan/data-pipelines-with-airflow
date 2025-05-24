@@ -35,11 +35,11 @@ def load(total_salary):
 
 default_args = {
     "owner": "zkan",
-    "start_date": timezone.datetime(2022, 2, 1),
+    "start_date": timezone.datetime(2025, 5, 1),
 }
 @dag(
     default_args=default_args,
-    schedule_interval=None,
+    schedule=None,
 )
 def demo_taskflow_api(): 
     salary_data = extract()

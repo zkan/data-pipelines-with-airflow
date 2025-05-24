@@ -14,7 +14,7 @@ from etl import (
 
 default_args = {
     "owner": "zkan",
-    "start_date": timezone.datetime(2025, 5, 23),
+    "start_date": timezone.datetime(2025, 5, 1),
 }
 with DAG(
     "cryptocurrency_data_pipeline",

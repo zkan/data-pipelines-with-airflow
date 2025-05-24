@@ -21,13 +21,13 @@ def _pull_values_from_xcom(**context):
 
 default_args = {
     "owner": "zkan",
-    "start_date": timezone.datetime(2022, 2, 1),
+    "start_date": timezone.datetime(2025, 5, 1),
 }
 with DAG(
     "demo_xcoms",
     default_args=default_args,
-    schedule_interval=None,
-) as dag:
+    schedule=None,
+):
 
     push_values_to_xcom = PythonOperator(
         task_id="push_values_to_xcom",

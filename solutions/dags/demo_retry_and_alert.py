@@ -23,7 +23,7 @@ def _get_data_from_api():
 default_args = {
     "owner": "zkan",
     "email": ["kan@dataengineercafe.io"],
-    "start_date": timezone.datetime(2022, 2, 1),
+    "start_date": timezone.datetime(2025, 5, 1),
     "retries": 3,
     "retry_delay": timedelta(seconds=5),
     "on_retry_callback": retry_callback,
@@ -32,8 +32,8 @@ default_args = {
 with DAG(
     "demo_retry_and_alert",
     default_args=default_args,
-    schedule_interval=None,
-) as dag:
+    schedule=None,
+):
 
     get_data_from_api = PythonOperator(
         task_id="get_data_from_api",
