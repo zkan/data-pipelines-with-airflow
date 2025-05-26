@@ -6,6 +6,15 @@ from airflow.providers.postgres.hooks.postgres import PostgresHook
 from airflow.utils import timezone
 
 
+# Connection Id: airflow_metastore
+# Connection Type: postgres
+# Host: postgres
+# Schema: airflow
+# Login: airflow
+# Password: airflow
+# Port: 5432
+
+
 def _query_data():
     pg_hook = PostgresHook(
         postgres_conn_id="airflow_metastore",
@@ -25,13 +34,13 @@ def _query_data():
 
 default_args = {
     "owner": "zkan",
-    "start_date": timezone.datetime(2022, 2, 1),
+    "start_date": timezone.datetime(2025, 5, 1),
 }
 with DAG(
     "demo_hooks",
     default_args=default_args,
-    schedule_interval=None,
-) as dag:
+    schedule=None,
+):
 
     query_data = PythonOperator(
         task_id="query_data",

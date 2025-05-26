@@ -11,13 +11,13 @@ def _greeting(greeting, name):
 
 default_args = {
     "owner": "zkan",
-    "start_date": timezone.datetime(2022, 2, 1),
+    "start_date": timezone.datetime(2025, 5, 1),
 }
 with DAG(
     "demo_custom_operator",
     default_args=default_args,
-    schedule_interval=None,
-) as dag:
+    schedule=None,
+):
 
     greeting1 = PythonOperator(
         task_id="greeting1",

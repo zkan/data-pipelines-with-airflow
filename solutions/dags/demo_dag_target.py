@@ -12,13 +12,13 @@ def _run_this(**context):
 
 default_args = {
     "owner": "zkan",
-    "start_date": timezone.datetime(2022, 2, 1),
+    "start_date": timezone.datetime(2025, 5, 1),
 }
 with DAG(
     "demo_dag_target",
     default_args=default_args,
-    schedule_interval=None,
-) as dag:
+    schedule=None,
+):
 
     run_this = PythonOperator(
         task_id="run_this",

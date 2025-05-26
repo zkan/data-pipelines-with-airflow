@@ -3,15 +3,19 @@ from airflow.sensors.filesystem import FileSensor
 from airflow.utils import timezone
 
 
+# Connection Id: fs
+# Connection Type: fs
+
+
 default_args = {
     "owner": "zkan",
-    "start_date": timezone.datetime(2022, 2, 1),
+    "start_date": timezone.datetime(2025, 5, 1),
 }
 with DAG(
     "demo_sensors",
     default_args=default_args,
-    schedule_interval=None,
-) as dag:
+    schedule=None,
+):
 
     is_file_available = FileSensor(
         task_id="is_file_available",
@@ -20,4 +24,3 @@ with DAG(
         poke_interval=5,
         timeout=100,
     )
-

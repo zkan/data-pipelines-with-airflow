@@ -5,15 +5,15 @@ from airflow.utils import timezone
 
 default_args = {
     "owner": "zkan",
-    "start_date": timezone.datetime(2022, 2, 1),
+    "start_date": timezone.datetime(2025, 5, 1),
     # "depends_on_past": True,
 }
 with DAG(
     "demo_backfilling",
     default_args=default_args,
-    schedule_interval="@daily",
+    schedule="@daily",
     catchup=False,
-) as dag:
+):
 
     echo_ds = BashOperator(
         task_id="echo_ds",

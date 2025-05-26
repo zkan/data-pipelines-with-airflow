@@ -16,16 +16,16 @@ def _world():
 
 default_args = {
     "owner": "zkan",
-    "start_date": timezone.datetime(2022, 2, 1),
+    "start_date": timezone.datetime(2025, 5, 1),
     "retries": 3,
     "retry_delay": timedelta(minutes=3),
 }
 with DAG(
     "demo_testing_dag",
     default_args=default_args,
-    schedule_interval=None,
+    schedule=None,
     catchup=False,
-) as dag:
+):
 
     hello = PythonOperator(
         task_id="hello",

@@ -5,13 +5,13 @@ from airflow.utils import timezone
 
 default_args = {
     "owner": "zkan",
-    "start_date": timezone.datetime(2022, 2, 1),
+    "start_date": timezone.datetime(2025, 5, 1),
 }
 with DAG(
     "demo_cli",
     default_args=default_args,
-    schedule_interval=None,
-) as dag:
+    schedule=None,
+):
 
     echo_ds = BashOperator(
         task_id="echo_ds",
